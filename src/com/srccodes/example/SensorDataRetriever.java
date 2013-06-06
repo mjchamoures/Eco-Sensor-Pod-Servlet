@@ -6,8 +6,6 @@ import com.rbnb.sapi.Sink;
 
 
 public class SensorDataRetriever {
-	//private static final int MAX_CHANNELS = 20;
-	//private static final float NUM_TIME_UNITS_PER_FETCH = 60; //Default
 	private ChannelMap rMap;
 	private Sink sink;
 	/* The number of data points needed to represent the 

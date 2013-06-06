@@ -21,7 +21,6 @@ public class SensorData {
 	Should match on SensorDataRetriever side */
 	private static int unitsPerFetch;
 	
-	/* used (5/27/13) */
 	public double[] timeStamp; /* Sec after 1970, jan 1st for each data pt*/
 	
 	public SensorData() {
@@ -64,6 +63,14 @@ public class SensorData {
 		compressThenSetSensorData(newData);*/
 	}
 	
+	public void setTimeStamp(double[] timeStamp) {
+		int i;
+		this.timeStamp = new double[timeStamp.length];
+		for(i = 0; i < timeStamp.length; i++) {
+			this.timeStamp[i] = timeStamp[i]; 
+		}
+	}
+	
 	/* 
 	 * Initial method of compressing data.
 	 * Takes every 6th seconds data points for each channels data so it 
@@ -82,15 +89,6 @@ public class SensorData {
 				else if (i >= timeBetweenDataPoints) {
 					this.data[j++] = newSensorData[i];
 				}
-		}
-	}
-	
-	public void setTimeStamp(double[] timeStamp) {
-		int i;
-		this.timeStamp = new double[timeStamp.length];
-		for(i = 0; i < timeStamp.length; i++) {
-			this.timeStamp[i] = timeStamp[i]; 
-			System.out.println(this.timeStamp[i]);
 		}
 	}
 }	

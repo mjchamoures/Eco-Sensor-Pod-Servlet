@@ -87,7 +87,7 @@ function chartSetup(channelName) {
 	 * Java servlet - DataFacilitator.java 
 	 */
 	// Send the request for  units to fetch in seconds
-	$.post("http://localhost:8080/DataControllerServlet/DataFacilitator", 
+	$.post("http://localhost:8080/EcoSensorPodServlet/DataFacilitator", 
 		{hostAddress: hostAddress,
 		 portNumber: portNumber,
 		 start: startSeconds, 
@@ -324,7 +324,7 @@ function drawChart(channelName, data, xAxis, yAxis) {
  */
 function getNewData(channelName) {
 	/* Send the request for  units to fetch in seconds, real-time most recent data */
-	$.post("http://localhost:8080/DataControllerServlet/DataFacilitator", 
+	$.post("http://localhost:8080/EcoSensorPodServlet/DataFacilitator", 
 			{hostAddress: hostAddress,
 		 	 portNumber: portNumber,
 		     start: 0, 
