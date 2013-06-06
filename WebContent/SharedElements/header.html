@@ -1,0 +1,55 @@
+<!-- Common header/navbar that all pages share -->
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="brand">CP Eco Sensor Pod</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li id="home"><a href="home.html" target="_self">Home</a></li>
+          <li id="about"><a href="about.html" target="_self">About</a></li>
+          <li id="contact"><a href="contact.html" target="_self">Contact</a></li>
+          <li id="documentation"><a href="documentation.html" target="_self">Documentation</a></li>
+        </ul>
+     </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+   <script>
+	function GetCurrentPageName() { 
+		//method to get Current page name from url. 
+		var PageURL = document.location.href; 
+		var PageName = PageURL.substring(PageURL.lastIndexOf('/') + 1); 
+	
+		return PageName.toLowerCase() ;
+	}
+	
+	$(document).ready(function(){	
+		var CurrPage = GetCurrentPageName();
+	
+		switch(CurrPage){
+			case 'home.html':
+			  $('#home').addClass('active') ;
+			  break;
+			case 'about.html':
+			  $('#about').addClass('active') ;
+			  break;
+			case 'contact.html':
+			  $('#contact').addClass('active') ;
+			  break;
+			case 'documentation.html':
+			  $('#documentation').addClass('active') ;
+			  break;
+		}
+	});
+</script>
+ 

@@ -1,0 +1,285 @@
+<!--  Home page of Sensor Pod Site. 
+	  Contains...
+ -->
+
+
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Eco Sensor Pod - A Cal Poly Senior Project</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<meta content="" name="author">
+
+<!-- Le styles -->
+<link rel="stylesheet" href="assets/css/bootstrap.css">
+<style type="text/css">
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+
+#container0 {
+	min-width: 1000px;
+	float: left;
+	margin-bottom: 10px;
+}
+</style>
+<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
+<link rel="stylesheet" href="datepicker/css/datepicker.css">
+<link rel="stylesheet" href="bootstrap-notify-master/css/bootstrap-notify.css">
+
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+
+
+</head>
+
+<body>
+	<!--  Insert the Navigation bar -->
+	<div id="header"></div>
+
+	<div class="container">
+		<div class='notifications center'></div>
+	
+		<form class="form-horizontal" action="" id="PresetsForm">
+			<fieldset>
+				<!-- Form Name -->
+				<legend>Select Chart Settings</legend>
+				<div class="row">
+					<div class="span12">
+						<div class="row">
+							<div class="span4">
+								<!-- Host input-->
+								<div class="control-group">
+								  <label class="control-label" for="HostAddress">Host: </label>
+								  <div class="controls">
+								    <input id="HostAddress" name="HostAddress" type="text" placeholder="x.x.x.x" class="input-large" required="">
+								    <p class="help-block">i.e. 50.18.112.125</p>
+								  </div>
+								</div>
+								
+								<!-- Port input-->
+								<div class="control-group" align="left">
+								  <label class="control-label" for="PortNum">Port:  </label>
+								  <div class="controls">
+								    <input id="PortNum" name="PortNum" type="text" placeholder="portNum" class="input-large" required="">
+								    <p class="help-block">i.e. 4444</p>
+								  </div>
+								</div>
+							</div>
+							<!-- Start Date and Time Form -->
+							<div class="span4">
+								<div class="control-group" align="left"> 
+								  <label class="control-label" for="startDate">End Date   </label> 
+								  <div class="controls"> 
+									<div data-date-format="yyyy-mm-dd" data-date="2013-05-28" class="input-append date myDatepicker">
+  											 <input id="endDate" placeholder="yyyy-mm-dd" type="text" value="" size="16" class="input-medium">
+   										<span class="add-on"><i class="icon-calendar"></i></span>
+									</div>
+									</div>
+								</div> 
+								
+								<!-- Time input-->
+								<div class="control-group" align = "left">
+								  <label class="control-label" for="endTime">End Time</label>
+								  <div class="controls">
+								    <input id="endTime" name="endTime" type="text" placeholder="hh:mm:ss" class="input-large" required="">
+								    <p class="help-block">You may optionally specify a timezone <br>(i.e. PDT), otherwise your local timezone<br> is used</p>
+								  </div>
+								</div>
+							</div>
+							<div class="span3">
+								<!-- Select Basic -->
+								<div class="control-group">
+								  <label class="control-label" for="dataDuration">Duration of data to display</label>
+								  <div class="controls">
+								    <select id="dataDuration" name="dataDuration" class="input-medium">							
+								      <option>10 seconds</option>
+								      <option>20 seconds</option>
+								      <option>30 seconds</option>
+								      <option>1 minute</option>
+								      <option>2 minutes</option>
+								      <option>5 minutes</option>
+								      <option>10 minutes</option>
+								      <option>20 minutes</option>
+								      <option>30 minutes</option>
+								      <option>1 hour</option>
+								      <option>2 hours</option>
+								      <option>4 hours</option>
+								      <option>8 hours</option>
+								      <option>16 hours</option>
+								      <option>1 day</option>
+								      <option>2 days</option>
+								      <option>5 days</option>
+								      <option>1 week</option>
+								    </select>
+								  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span12">
+						<div class="row">
+							<div class="span3">
+							</div>
+							<!-- Real-time -->
+							<div class="span3">
+								<label class="control-label" 
+									for="Real-Time Data Updates Checkbox">Real-Time Data
+									Updates <br> (Over-rides date/time)
+									</label>
+								<div class="controls" id="RealTime" >
+									<label class="radio inline" for="Real-Time Data Updates Checkbox-0">
+										<input type="radio" name="Real-Time Data Updates Checkbox"
+										id="Real-Time Data Updates Checkbox-0" value="ON">
+										ON
+									</label> <label class="radio inline" for="Real-Time Data Updates Checkbox-1">
+										<input type="radio" name="Real-Time Data Updates Checkbox"
+										id="Real-Time Data Updates Checkbox-1" value="OFF"
+										checked="checked"> OFF
+									</label>
+								</div>
+							</div>
+							<div class="span3">
+								<!-- Pause -->
+								<div class="control-group">
+								  <label class="control-label" for="PauseOrPlay">Update Control</label>
+								  <div class="controls">
+								    <label class="radio inline" for="PauseOrPlay-0">
+								      <input type="radio" name="PauseOrPlay" id="PauseOrPlay-0" value="PAUSE">
+								      PAUSE
+								    </label>
+								    <label class="radio inline" for="PauseOrPlay-1">
+								      <input type="radio" name="PauseOrPlay" id="PauseOrPlay-1" value="PLAY" checked="checked">
+								      PLAY
+								    </label>
+								  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+
+		<div class="row">
+			<fieldset>
+				<legend>Choose Sensor Type to View</legend>
+				<div class="span3">
+					<div class="well sidebar-nav" id="channelList">
+						<ul class="nav nav-list" id="channelList">
+							<li class="nav-header"><a href="#" data-target="#6799_Pressure"></a>6799_Pressure</li>
+							<ul id="6799_Pressure" class="collapse">
+								<li title="channel" id="6799_Pressure/Pressure"><a href="#" data-target="#channel">Pressure</a></li>
+							</ul>
+							<li class="divider"></li>
+							<li class="nav-header"><a href="#" data-target="#F72D_Accelerometer"></a>F72D_Accelerometer</li>
+							<ul id="F72D_Accelerometer" class="collapse">
+								<li title="channel" id="F72D_Accelerometer/linear_acceleration_X"><a href="#">linear_acceleration_X</a></li>
+								<li title="channel" id="F72D_Accelerometer/linear_acceleration_Y"><a href="#">linear_acceleration_Y</a></li>
+								<li title="channel" id="F72D_Accelerometer/linear_acceleration_Z"><a href="#">linear_acceleration_Z</a></li>
+								<li title="channel" id="F72D_Accelerometer/x"><a href="#">x</a></li>
+								<li title="channel" id="F72D_Accelerometer/y"><a href="#">y</a></li>
+								<li title="channel" id="F72D_Accelerometer/z"><a href="#">z</a></li>
+							</ul>
+							<li class="divider"></li>
+							<li class="nav-header"><a href="#" data-target="#IMM"></a>IMM</li>
+							<ul id="IMM" class="collapse">
+								<li title="channel" id="IMM/Battery"><a href="#">Battery</a></li>
+								<li title="channel" id="IMM/ContTemp"><a href="#">ContTemp</a></li>
+								<li title="channel" id="IMM/Date"><a href="#">Date</a></li>
+								<li title="channel" id="IMM/Est_pH-ext"><a href="#">Est_pH-ext</a></li>
+								<li title="channel" id="IMM/Est_pH-int" ><a href="#">Est_pH-int</a></li>
+								<li title="channel" id="IMM/Time" ><a href="#">Time</a></li>
+								<li title="channel" id="IMM/VBatt" ><a href="#">VBatt</a></li>
+								<li title="channel" id="IMM/VExt" ><a href="#">VExt</a></li>
+								<li title="channel" id="IMM/Vint" ><a href="#">Vint</a></li>
+								<li title="channel" id="IMM/Vpres" ><a href="#">Vpres</a></li>
+								<li title="channel" id="IMM/Vtherm" ><a href="#">Vtherm</a></li>
+								<li title="channel" id="IMM/pH_ext" ><a href="#">pH_ext</a></li>
+								<li title="channel" id="IMM/pH_int" ><a href="#">pH_int</a></li>
+								<li title="channel" id="IMM/x1" ><a href="#">x1</a></li>
+								<li title="channel" id="IMM/x2" ><a href="#">x2</a></li>
+															</ul>
+							<li class="divider"></li>
+							<li class="nav-header"><a href="#" data-target="#Internal"></a>Internal Sensor Channels</li>
+							<ul id="Internal" class="collapse">
+								<li title="channel" id="humidity/humidity" title="channel"><a href="#">Humidity</a></li>
+								<li title="channel" id="temperature/temperature"><a href="#">Temperature</a></li>
+								<li title="channel" id="voltage/voltage"><a href="#">Voltage</a></li>
+							</ul>
+						</ul>
+					</div>
+					<!--/.well -->
+				</div>
+				<div class="span9">
+					<!--  Where chart will go -->
+					<div class="hero-unit" id="chartArea">
+						<h1>Hello, scientists!</h1>
+						<p>Welcome to the Eco Sensor Pod Website. This is where a
+							chart will be displayed. Select a type of sensor chart listed on
+							the left to view.</p>
+						<p>
+							<a class="btn btn-primary btn-large" href="about.html">Learn
+								more »</a>
+						</p>
+					</div>
+				</div>
+				
+				<!--/span-->
+				
+			</fieldset>
+			<!--/fieldset-->
+		</div>
+		<!--/row-->
+
+		<div class="container">
+			<hr>
+		</div>
+		<!-- /container -->
+
+		<!--  Insert the footer -->
+		<div id="footer"></div>
+	</div>
+
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.js" type="text/javascript"></script>	
+	<script src= "datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+	<script src= "bootstrap-notify-master/js/bootstrap-notify.js" type="text/javascript"></script>
+	<script src="http://code.highcharts.com/stock/highstock.js"></script>
+	<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+	
+<!-- 	<script>  
+//  		if(window.Highcharts){
+//  	    	window.Highcharts = null;
+//  		}
+<!--  	</script>  -->
+	
+	<script src="http://localhost:8080/DataControllerServlet/draw.js"></script>
+
+	<!--  Since this is placed at the bottom, no need for $(document).ready(function(){}) -->
+	<script type="text/javascript">
+    $(function() {
+        $('#header').load('SharedElements/header.html');
+        $('#footer').load('SharedElements/footer.html');
+  	});
+    </script>
+
+<!-- ****** -->	
+
+
+</body>
+</html>
