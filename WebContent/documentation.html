@@ -21,6 +21,13 @@
     </style>
     <link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 
+
+  </head> 
+
+  <body> 
+     
+  </body> 
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -30,10 +37,9 @@
 
   <body>
   	<div id="header"></div>
-
-
+  		<div id="includedContent"></div>
+  	
     <div class="container">
-
       <hr>
 
     </div> <!-- /container -->
@@ -47,7 +53,11 @@
 	<script src="http://code.highcharts.com/stock/highstock.js"></script>
 	<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>    
     <script src="assets/js/bootstrap.js"></script>
-
+ <script type="text/javascript">
+    $(function(){
+      $("#includedContent").load("Documentation/html/indexDocumentation.html"); 
+    });
+	</script> 
     <!--  Since this is placed at the bottom, no need for $(document).ready(function(){}) -->
     <script type="text/javascript">
     $(function() {

@@ -1,0 +1,139 @@
+\section{com.\-srccodes.\-example.\-Sensor\-Data\-Retriever Class Reference}
+\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever}\index{com.\-srccodes.\-example.\-Sensor\-Data\-Retriever@{com.\-srccodes.\-example.\-Sensor\-Data\-Retriever}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Sensor\-Data\-Retriever} (String {\bf host\-Address}, String {\bf port\-Number})
+\item 
+{\bf Sensor\-Data\-Retriever} (String {\bf host\-Address}, String {\bf port\-Number}, String channel\-Name)  throws S\-A\-P\-I\-Exception
+\item 
+void {\bf go\-Fetch\-Data} (int start, int duration, String time\-Ref)  throws S\-A\-P\-I\-Exception 
+\item 
+void {\bf Reset\-Connection} (int {\bf units\-Per\-Fetch})
+\item 
+void {\bf End\-Connection} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Sensor\-Data} {\bf sensor\-Data}
+\item 
+int {\bf requested\-Channel\-Index}
+\item 
+String[$\,$] {\bf channel\-Names}
+\item 
+int {\bf units\-Per\-Fetch}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Channel\-Map {\bf r\-Map}
+\item 
+Sink {\bf sink}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+B\-A\-C\-K\-E\-N\-D\-: \doxyref{Sensor\-Data\-Retriever}{p.}{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever} Class
+
+Purpose\-: Contains all the Data\-Turbine retrieval tasks. Listens for requests from the \doxyref{Data\-Facilitator}{p.}{classcom_1_1srccodes_1_1example_1_1_data_facilitator} Servlet. Fetches data for the requested channel from the requested sensor pod deployment
+
+Author\-: Michael Chamoures
+
+Date\-: 6/11/2013 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!Sensor\-Data\-Retriever@{Sensor\-Data\-Retriever}}
+\index{Sensor\-Data\-Retriever@{Sensor\-Data\-Retriever}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{Sensor\-Data\-Retriever}]{\setlength{\rightskip}{0pt plus 5cm}com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-Sensor\-Data\-Retriever (
+\begin{DoxyParamCaption}
+\item[{String}]{host\-Address, }
+\item[{String}]{port\-Number}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_a17ccfc12119b4fc68362a7e56e62bfb3}
+Constructor. In the future this will be extended to construct a list of current available channel names. 
+\begin{DoxyParams}{Parameters}
+{\em host\-Address} & Host address of deployed sensor pod \\
+\hline
+{\em port\-Number} & Port number of deployed sensor pod \\
+\hline
+\end{DoxyParams}
+\index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!Sensor\-Data\-Retriever@{Sensor\-Data\-Retriever}}
+\index{Sensor\-Data\-Retriever@{Sensor\-Data\-Retriever}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{Sensor\-Data\-Retriever}]{\setlength{\rightskip}{0pt plus 5cm}com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-Sensor\-Data\-Retriever (
+\begin{DoxyParamCaption}
+\item[{String}]{host\-Address, }
+\item[{String}]{port\-Number, }
+\item[{String}]{channel\-Name}
+\end{DoxyParamCaption}
+) throws S\-A\-P\-I\-Exception\hspace{0.3cm}{\ttfamily [inline]}}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_adf136882f72138b61a42165667b493ce}
+Constructor if a channel name for a particular sensor is all that's requested.\-Opens a connection with the desired sensor pod and adds the channel\-Name to get data from to the channel map 
+\begin{DoxyParams}{Parameters}
+{\em host\-Address} & Host address of deployed sensor pod \\
+\hline
+{\em port\-Number} & Port number of deployed sensor pod \\
+\hline
+{\em channel\-Name} & Requested channel to get data from \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!End\-Connection@{End\-Connection}}
+\index{End\-Connection@{End\-Connection}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{End\-Connection}]{\setlength{\rightskip}{0pt plus 5cm}void com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-End\-Connection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_a70abcae4cf9c50e82382c650ce5227ef}
+Closes the connection to the server To be called at ending of \doxyref{Data\-Facilitator}{p.}{classcom_1_1srccodes_1_1example_1_1_data_facilitator} \index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!go\-Fetch\-Data@{go\-Fetch\-Data}}
+\index{go\-Fetch\-Data@{go\-Fetch\-Data}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{go\-Fetch\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-go\-Fetch\-Data (
+\begin{DoxyParamCaption}
+\item[{int}]{start, }
+\item[{int}]{duration, }
+\item[{String}]{time\-Ref}
+\end{DoxyParamCaption}
+) throws S\-A\-P\-I\-Exception\hspace{0.3cm}{\ttfamily [inline]}}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_a97bef98c3e1069e4ffc7b01a6abea0d1}
+Main method in this class Responsible for requesting and retrieving sensor data from the R\-B\-N\-B server Fills a \doxyref{Sensor\-Data}{p.}{classcom_1_1srccodes_1_1example_1_1_sensor_data} object to \doxyref{Data\-Facilitator}{p.}{classcom_1_1srccodes_1_1example_1_1_data_facilitator} to be passed along to the front-\/end to be charted 
+\begin{DoxyParams}{Parameters}
+{\em start} & Time in ms from Jan 1, 1970 \\
+\hline
+{\em duration} & Duration of data to fetch, in ms \\
+\hline
+{\em time\-Ref} & \char`\"{}newest\char`\"{} or \char`\"{}absolute\char`\"{} depending on typee of fetch \\
+\hline
+\end{DoxyParams}
+\index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!Reset\-Connection@{Reset\-Connection}}
+\index{Reset\-Connection@{Reset\-Connection}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{Reset\-Connection}]{\setlength{\rightskip}{0pt plus 5cm}void com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-Reset\-Connection (
+\begin{DoxyParamCaption}
+\item[{int}]{units\-Per\-Fetch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_a0adfd7be568172ab3659cc361d23ff85}
+
+
+\subsection{Member Data Documentation}
+\index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!channel\-Names@{channel\-Names}}
+\index{channel\-Names@{channel\-Names}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{channel\-Names}]{\setlength{\rightskip}{0pt plus 5cm}String [$\,$] com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-channel\-Names}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_abdfbbdec4daa09c08e357dd48c52821c}
+Not used right now (6/11) \index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!requested\-Channel\-Index@{requested\-Channel\-Index}}
+\index{requested\-Channel\-Index@{requested\-Channel\-Index}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{requested\-Channel\-Index}]{\setlength{\rightskip}{0pt plus 5cm}int com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-requested\-Channel\-Index}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_a4df87bf365471a3992b69f80d8d77c16}
+Keeps track of the index returned to r\-Map \index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!r\-Map@{r\-Map}}
+\index{r\-Map@{r\-Map}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{r\-Map}]{\setlength{\rightskip}{0pt plus 5cm}Channel\-Map com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-r\-Map\hspace{0.3cm}{\ttfamily [private]}}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_ac99288b6f07acfbe2b7c09ef9a5a6668}
+Keeps track of channels requested \index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!sensor\-Data@{sensor\-Data}}
+\index{sensor\-Data@{sensor\-Data}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{sensor\-Data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sensor\-Data} com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-sensor\-Data}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_a84d980b2d25409879c92126aaabaa821}
+Holds a sensors data and timestamps \index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!sink@{sink}}
+\index{sink@{sink}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{sink}]{\setlength{\rightskip}{0pt plus 5cm}Sink com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-sink\hspace{0.3cm}{\ttfamily [private]}}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_a13cebf5c673bfb9d07477f9431df5091}
+Sink object to open a connection with \index{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}!units\-Per\-Fetch@{units\-Per\-Fetch}}
+\index{units\-Per\-Fetch@{units\-Per\-Fetch}!com::srccodes::example::SensorDataRetriever@{com\-::srccodes\-::example\-::\-Sensor\-Data\-Retriever}}
+\subsubsection[{units\-Per\-Fetch}]{\setlength{\rightskip}{0pt plus 5cm}int com.\-srccodes.\-example.\-Sensor\-Data\-Retriever.\-units\-Per\-Fetch}\label{classcom_1_1srccodes_1_1example_1_1_sensor_data_retriever_af50208cb8aedf6c3c9559847e031f2a2}
+Duration worth of data to fetch 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/com/srccodes/example/{\bf Sensor\-Data\-Retriever.\-java}\end{DoxyCompactItemize}

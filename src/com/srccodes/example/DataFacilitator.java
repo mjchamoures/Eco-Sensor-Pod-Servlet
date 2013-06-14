@@ -1,3 +1,6 @@
+
+
+
 package com.srccodes.example;
 
 import java.io.IOException;
@@ -13,11 +16,25 @@ import com.srccodes.example.SensorDataRetriever;
 
 /**
  * Servlet implementation class DataFacilitator
+ * 
+ * Purpose: The "MIDDLE-END". Acts as the middle man between front
+ * 			and back end. Communicates requests and replies
+ * 			to and from each. Parses results into JSON
+ * 
+ * Author: Michael Chamoures
+ * 
+ * Date: 6/11/2013
  */
 @WebServlet("/DataFacilitator")
 public class DataFacilitator extends HttpServlet {
 	private static final long serialVersionUID = 1L;
         
+	/**
+	 * Intercepts JQuery/AJAX Post() requests from the front-end draw.js 
+	 * @param request The various request variables passed from draw.js
+	 * @param response Used to write back the JSON response to the front-end
+	 * 	 	  to be charted
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
@@ -29,13 +46,14 @@ public class DataFacilitator extends HttpServlet {
 		String channelName = request.getParameter("channelName");
 		String timeRef = request.getParameter("timeRef");
 		SensorDataRetriever sdr;
-		
-		/* Get sensor readings! */
+		int i;
 		try {
 			/* Create a new SDR to open connection to RBNB server */
 			sdr = new SensorDataRetriever(hostAddress, portNumber, channelName);
 			/* Fill the SensorData instance var of sdr with data */
 			sdr.goFetchData(start, duration, timeRef);
+			
+			
 			
 			/* Convert the arr[][] to JSON formatting for JQuery */
 			String json = new Gson().toJson(sdr.sensorData);
@@ -47,9 +65,9 @@ public class DataFacilitator extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			/* Pass along the data back to front-end! */
 			response.getWriter().write(json);
-		} catch (SAPIException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		}
+		catch(SAPIException e) {
+			
+		}
 	}
 }

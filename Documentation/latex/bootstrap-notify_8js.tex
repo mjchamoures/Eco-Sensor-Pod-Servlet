@@ -1,0 +1,91 @@
+\section{Web\-Content/bootstrap-\/notify-\/master/js/bootstrap-\/notify.js File Reference}
+\label{bootstrap-notify_8js}\index{Web\-Content/bootstrap-\/notify-\/master/js/bootstrap-\/notify.\-js@{Web\-Content/bootstrap-\/notify-\/master/js/bootstrap-\/notify.\-js}}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+function Notification {\bf on\-Close}
+\item 
+Notification prototype {\bf show}
+\item 
+Notification prototype {\bf hide}
+\item 
+fn {\bf notify}
+\item 
+fn {\bf notify} {\bf defaults}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\index{bootstrap-\/notify.\-js@{bootstrap-\/notify.\-js}!defaults@{defaults}}
+\index{defaults@{defaults}!bootstrap-notify.js@{bootstrap-\/notify.\-js}}
+\subsubsection[{defaults}]{\setlength{\rightskip}{0pt plus 5cm}fn {\bf notify} defaults}\label{bootstrap-notify_8js_ad18305b9513047ea769b1f5627f3bdff}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{
+    type: \textcolor{stringliteral}{'success'},
+    closable: \textcolor{keyword}{true},
+    transition: \textcolor{stringliteral}{'fade'},
+    fadeOut: \{
+      enabled: \textcolor{keyword}{true},
+      delay: 3000
+    \},
+    message: null,
+    onClose: \textcolor{keyword}{function} () \{\},
+    onClosed: \textcolor{keyword}{function} () \{\}
+  \}
+\})(window.jQuery)
+\end{DoxyCode}
+\index{bootstrap-\/notify.\-js@{bootstrap-\/notify.\-js}!hide@{hide}}
+\index{hide@{hide}!bootstrap-notify.js@{bootstrap-\/notify.\-js}}
+\subsubsection[{hide}]{\setlength{\rightskip}{0pt plus 5cm}Notification prototype hide}\label{bootstrap-notify_8js_a672a02c1fbd18d4f1854d6e0891c11f4}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function} () \{
+    \textcolor{keywordflow}{if} (this.options.fadeOut.enabled)
+      this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut(\textcolor{stringliteral}{'slow'}, $.proxy(Notification.onClose, \textcolor{keyword}{
+      this}));
+    \textcolor{keywordflow}{else} Notification.onClose.call(\textcolor{keyword}{this});
+  \}
+\end{DoxyCode}
+\index{bootstrap-\/notify.\-js@{bootstrap-\/notify.\-js}!notify@{notify}}
+\index{notify@{notify}!bootstrap-notify.js@{bootstrap-\/notify.\-js}}
+\subsubsection[{notify}]{\setlength{\rightskip}{0pt plus 5cm}fn notify}\label{bootstrap-notify_8js_a30b9e2447195ef675c83a3ca3173dc19}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function} (options) \{
+    \textcolor{keywordflow}{return} \textcolor{keyword}{new} Notification(\textcolor{keyword}{this}, options);
+  \}
+\end{DoxyCode}
+\index{bootstrap-\/notify.\-js@{bootstrap-\/notify.\-js}!on\-Close@{on\-Close}}
+\index{on\-Close@{on\-Close}!bootstrap-notify.js@{bootstrap-\/notify.\-js}}
+\subsubsection[{on\-Close}]{\setlength{\rightskip}{0pt plus 5cm}function Notification on\-Close}\label{bootstrap-notify_8js_a1d19e348cde9736dbbb2a439678359f2}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function} () \{
+    this.options.onClose();
+    $(this.$note).\textcolor{keyword}{remove}();
+    this.options.onClosed();
+  \}
+\end{DoxyCode}
+\subsubsection*{\doxyref{bootstrap-\/notify.\-js}{p.}{bootstrap-notify_8js} v1.\-0.\-0 }
+
+Copyright 2012 Nijiko Yonskai {\tt nijikokun@gmail.\-com} \subsubsection*{Copyright 2012 Goodybag, Inc. }
+
+Licensed under the Apache License, Version 2.\-0 (the \char`\"{}\-License\char`\"{}); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+{\tt http\-://www.\-apache.\-org/licenses/\-L\-I\-C\-E\-N\-S\-E-\/2.\-0}
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \char`\"{}\-A\-S I\-S\char`\"{} B\-A\-S\-I\-S, W\-I\-T\-H\-O\-U\-T W\-A\-R\-R\-A\-N\-T\-I\-E\-S O\-R C\-O\-N\-D\-I\-T\-I\-O\-N\-S O\-F A\-N\-Y K\-I\-N\-D, either express or implied. See the License for the specific language governing permissions and limitations under the License. \index{bootstrap-\/notify.\-js@{bootstrap-\/notify.\-js}!show@{show}}
+\index{show@{show}!bootstrap-notify.js@{bootstrap-\/notify.\-js}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}Notification prototype show}\label{bootstrap-notify_8js_a9fbb2b2546eb56547c4b5f8a49429e4d}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function} () \{
+    \textcolor{keywordflow}{if} (this.options.fadeOut.enabled)
+      this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut(\textcolor{stringliteral}{'slow'}, $.proxy(Notification.onClose, \textcolor{keyword}{
+      this}));
+
+    this.$element.append(this.$note);
+    this.$note.alert();
+  \}
+\end{DoxyCode}

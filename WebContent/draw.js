@@ -1,20 +1,36 @@
 /* GLOBAL */
-var chartData = [];
-var newPoint = [];
-var numInitialDataPoints; /* 3000 with the below numbers (6000/60000) */
-var timeBetweenDataPoints = 6000; /* In milliseconds. 10 data points per minute */
-var msPerMinute = 60000; /* Milliseconds per minute */
-var startSeconds; /* Calculated from start date and time */
-var durationSeconds = 10;  /* Default option in drop-down */
-var hostAddress;
-var portNumber;
-var realTimeFlag = 0; /* Keeps track of if real-time updates are on */
+var newPoint = []; /**< A new point of data during real-time updates */
+var numInitialDataPoints; /**< 3000 with the below numbers (6000/60000) */
+var timeBetweenUpdates = 5000; /**< In milliseconds */
+var msPerMinute = 60000; /**< Milliseconds per minute */
+var startSeconds; /**< Calculated from start date and time */
+var durationSeconds = 10;  /**< Default option in drop-down */
+var hostAddress; /**<Host address of a deployed sensor pod*/
+var portNumber; /**< Port num of a deployed sensor pod*/
+var realTimeFlag = 0; /**< Keeps track of if real-time updates are on */
 var lastAddedTimestamp = 0;
 var BAD_DATA_REQUEST = -404;
 var TIME_STAMP = 0;
 var NEW_DATA = 1;
+var loadInterval; /**< Keeps track of real-time update intervals */
 
-/* User accesses page, get started! */
+
+/** 
+ * 
+ * FRONT-END Draw.js
+ * 
+ * Purpose: Performs the charting and data requesting
+ * 			to the middle-end DataFacilitator Servlet.
+ * 
+ *		   Main function that gets triggered upon access to the home page.
+ *		   Sits waiting for information to be entered into the Settings
+ *		   forms or until someone clicks a channelName link
+ * 
+ * Author: Michael Chamoures
+ * 
+ * Modified: 6/11/2013
+ */
+
 $(document).ready(function() {
 	
 	/* This checks to see if a user clicks one of the
@@ -42,6 +58,13 @@ $(document).ready(function() {
 	    	var VALID_PRESET_INPUT = 1;
 	    	/* Make sure user has entered inputs correctly */
 	    	if(saveChartPresets() == VALID_PRESET_INPUT) {	
+	    		if (loadInterval) {
+	    			/* There's already a sensor updating in control
+	    			 * of the interval. Clear it so it doesn't 
+	    			 * overlap with the new one
+	    			 */
+	    			clearInterval(loadInterval);
+	    		}
 			   	/* Get started - fill chart with what's entered into the form */
 				chartSetup(channelName);
 			}
@@ -60,9 +83,12 @@ $(document).ready(function() {
 });
 
 
-/* Organize and setup each channels data to be passed off to be drawn 
- * on its corresponding chart. Any additional charts that are desired
- * will be given a case in the switch statement
+/**
+ * The first time a JQuery request is made to the middle-end (DataFacilitator).
+ * If data is available for the request channelName, then the initial series
+ * data is filled and sent off to be organized and charted
+ * 
+ * @param channelName Name of channel link that was clicked on to be charted
  */
 function chartSetup(channelName) {
 	var initialData = [];
@@ -80,13 +106,11 @@ function chartSetup(channelName) {
 	
 	/* Set the default chart options that all charts share */
 	setChartOptions();
-	// Number of channels (sensors) with data to be charted
-	//var numChannels = initialData.length; 
 	
 	/* AJAX call to go fetch data from a back-end 
-	 * Java servlet - DataFacilitator.java 
+	 * Java servlet - DataFacilitator.java for filling the initial
+	 * series data
 	 */
-	// Send the request for  units to fetch in seconds
 	$.post("http://localhost:8080/EcoSensorPodServlet/DataFacilitator", 
 		{hostAddress: hostAddress,
 		 portNumber: portNumber,
@@ -96,7 +120,6 @@ function chartSetup(channelName) {
 		 timeRef: timeRef
 		}, 
 		function(sensorData) {
-			//var time;
 			var MS_PER_SECOND = 1000;
 			var i = 0;
 			var data = sensorData.data;
@@ -143,9 +166,13 @@ function chartSetup(channelName) {
 }	
 	
 
-/* Organize and setup each channels data to be passed off to be drawn 
+/**
+ *  Organize and setup each channels data to be passed off to be drawn 
  * on its corresponding chart. Any additional charts that are desired
- * will be given a case in the switch statement
+ * will be given a case in the switch statement.
+ * 
+ * @param channelName Name of channel link that was clicked on to be charted
+ * @param data The initial series data  
  */
 function organizeDataToBeDrawn(channelName, data) {
 	switch(channelName) {
@@ -230,53 +257,57 @@ function organizeDataToBeDrawn(channelName, data) {
 		}
 }
 
-/* Generic chart drawing function. Might end up using actual language commands instead
- * It takes the following paramaters:
- * 		channelName    - A sensor's channel name. String 
- * 		data	      - The initial set of data for a particular sensor. double[]
- * 		title	      - Title name of the chart. String
- * 	    xAxis 	   	  - X-axis title name
- * 	    yAxis 	   	  - Y-axis title name
- * 	    seriesName    - Name of the data series
- * 	    containerName - Name of the div container chart is to be placed in (see html)
+/**
+ * Generic chart drawing function. Draws the initial Series chart.
+ * If real-time updates are on, the "events" option of the chart is set.
+ * 
+ * @param  channelName   A sensor's channel name. String 
+ * @param  data	         The initial set of data for a particular sensor. double[]
+ * @param  xAxis 	   	 X-axis title name
+ * @param  yAxis 	   	 Y-axis title name
  */
 function drawChart(channelName, data, xAxis, yAxis) {
 	var MS_PER_SECOND = 1000; //in milliseconds. Match on java side - dataUpdateController
 	var events = "";
 
+	/* If real-time updates are "on", set up chart to request new data every
+	 * timeBetweenUpdate seconds
+	 */
 	if ($('input[name="Real-Time Data Updates Checkbox"]:checked', "#PresetsForm").val() == 'ON') {
 		events = {
-				load : function() {
-						// set up the updating of the chart every timeBetweenDataPoints seconds
-						var series0 = this.series[0];
-						var series1 = this.series[1];
-						setInterval(function() {
-							if (getNewData(channelName)) {
-								if (newPoint[0]) {
-									var flag = true;
-									/* If the "Pause" checkbox is checked, buffer data but don't post it */
-									if ($('input[name="PauseOrPlay"]:checked', "#PresetsForm").val() == 'PAUSE') {
-			                        	flag = false;
-			                        }
-									series0.addPoint([
-										newPoint[0] * MS_PER_SECOND,
-										newPoint[1]
-									], flag, flag);
-									series1.addPoint([
-										newPoint[0] * MS_PER_SECOND,
-										newPoint[1]
-									], flag, flag);	
-								}
+			load : function() {
+					/* set up the updating of the chart every timeBetweenDataPoints seconds */
+					var series0 = this.series[0];
+					var series1 = this.series[1];
+					/* Set the global var loadInterval to keep track of which
+					 * sensor is updating
+					 */
+					loadInterval = setInterval(function() {
+						if (getNewData(channelName)) {
+							if (newPoint[0]) {
+								var flag = true;
+								/* If the "Pause" checkbox is checked, buffer data but don't post it */
+								if ($('input[name="PauseOrPlay"]:checked', "#PresetsForm").val() == 'PAUSE') {
+		                        	flag = false;
+		                        }
+								series0.addPoint([
+									newPoint[0] * MS_PER_SECOND,
+									newPoint[1]
+								], flag, flag);
+								series1.addPoint([
+									newPoint[0] * MS_PER_SECOND,
+									newPoint[1]
+								], flag, flag);	
 							}
-						}, 5000);
-					}
+						}
+					}, timeBetweenUpdates);
+				}
 			};
 	}
 		
-	// define the chart
+	/* define the chart */
 	options = {
 		 chart: {
-			//renderTo : "chartArea",
 			type: 'spline',
 			events : events
 		},
@@ -300,6 +331,7 @@ function drawChart(channelName, data, xAxis, yAxis) {
 		},
 		tooltip: {
 			stickyTracking:false, 
+			/* This is for the box that appears when you hover over a point */
 			formatter: function() {
 				var s = '<b>'+ Highcharts.dateFormat('%A, %b %e, %Y <br/>  %H:%M:%S',
 						this.x) +'</b>';
@@ -315,12 +347,15 @@ function drawChart(channelName, data, xAxis, yAxis) {
 			enabled: true
 		}
     };
-	// Create the chart
+	/* Create the chart */
 	$("#chartArea").highcharts('StockChart', options);
 }
 
-/* Event called by each drawChart function to query the server for new data
+/** 
+ * Event called by each drawChart function to query the server for new data
  * and update the chart.
+ * 
+ * @param  channelName   A sensor's channel name. String 
  */
 function getNewData(channelName) {
 	/* Send the request for  units to fetch in seconds, real-time most recent data */
@@ -335,14 +370,17 @@ function getNewData(channelName) {
 			function(sensorData) {
 				var BAD_DATA_REQUEST = -404;
 				if (sensorData.timeStamp[0] <= lastAddedTimestamp) {
+					/* Got an old time. Toss it */
 					newPoint[1] = BAD_DATA_REQUEST;
 					return false;
 				}
 				else if (sensorData.data[0] == BAD_DATA_REQUEST){
+					/* Data was unavailable */
 					newPoint[1]  = BAD_DATA_REQUEST;
 					return false;
 				}
 				else {
+					/* Assign new values to be added to chart */
 					newPoint[0] = sensorData.timeStamp[0];
 					newPoint[1]  = sensorData.data[0];
 					lastAddedTimestamp = newPoint[0];
@@ -355,7 +393,9 @@ function getNewData(channelName) {
 	return true;
 }
 
-/* Capture input from user regarding start date/time, duration and real-time */
+/**
+ *  Capture input from user regarding start date/time, duration and real-time 
+ */
 function saveChartPresets() {
 	var BAD_PRESET_INPUT = 0;
 	var VALID_PRESET_INPUT = 1;
@@ -368,7 +408,6 @@ function saveChartPresets() {
 		 * for a change of the button */
 		 if ($("#endDate").val() != "" && $("#endTime").val() != "") {
 			 /* Parse the input date and time and convert to seconds */
-			 //startSeconds = convertDateTimeToSeconds($("#startDate").val(), $("#startTime").val());
 			 startSeconds = Date.parse($("#endDate").val() + " " + $("#endTime").val()) / 1000;
 			 startSeconds -= durationSeconds;
 		 }
@@ -386,7 +425,7 @@ function saveChartPresets() {
 	   realTimeFlag = 1; /* Real-time updates are on */
     }
     
-    /* Checkt to make sure they entered a correct host/port */
+    /* Check to make sure they entered a correct host/port */
     if ($("#HostAddress").val() == "" || $("#PortNum").val() == "")  {
 		$('.center').notify({
 			   message: { text: "ERROR! Please Enter Host Address and/or Port Number" },
@@ -446,6 +485,9 @@ function convertDateTimeToSeconds(date, time) {
 	return parseInt(seconds);
 }
 
+/**
+ * Gets the input data from the calendar datepicker
+ */
 function getInputDate() {
 	/* Date Picker stuff */
 	$('.myDatepicker').each(function() {
@@ -459,14 +501,14 @@ function getInputDate() {
 	    $picker.on('changeDate', function(ev){
 	        if (ev.date.valueOf() > maxDate.valueOf()){
 	            
-	            // Handle previous date
+	            /* Handle previous date */
 	        	$('.center').notify({
 				    message: { text: 'ERROR! Invalid Date.' },
 					fadeOut: { enabled: false }
 				  }).show();
 	            pickerObject.setValue(maxDate);
 	            
-	            // And this for later versions (in case)
+	            /* And this for later versions (in case) */
 	            ev.preventDefault();
 	            return false;
 	        }
@@ -476,7 +518,9 @@ function getInputDate() {
 	    });
 	});
 }
-/* Sets the default chart options and themes that all charts share */
+/**
+ *  Sets the default chart options and themes that all charts share 
+ */
 function setChartOptions() {
 	Highcharts.setOptions({
     	global: {
@@ -614,6 +658,10 @@ function setChartOptions() {
     });
 }
 
+/**
+ * Called if someone tries to click a channelName without the necessaty
+ * settings filled in
+ */
 function badDataAlert() {
 	$(function(){
 	    $('.center').on("click", function(){

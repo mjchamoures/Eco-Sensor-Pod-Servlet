@@ -1,0 +1,84 @@
+\section{Web\-Content/\-Deprecated\-Draw.js File Reference}
+\label{_deprecated_draw_8js}\index{Web\-Content/\-Deprecated\-Draw.\-js@{Web\-Content/\-Deprecated\-Draw.\-js}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+document {\bf ready} (function()\{var initial\-Time\-In\-Minutes=parse\-Int(prompt(\char`\"{}Select the initial duration of time (in minutes) you \char`\"{}+\char`\"{}would like to view (must be whole number)\-: \char`\"{}));var {\bf num\-Initial\-Data\-Points};var time\-Between\-Data\-Points=6000;var {\bf ms\-Per\-Minute}=60000;{\bf num\-Initial\-Data\-Points}=parse\-Int((initial\-Time\-In\-Minutes $\ast${\bf ms\-Per\-Minute})/time\-Between\-Data\-Points);if(num\-Initial\-Data\-Points!=null)\{{\bf Get\-Initial\-Data}({\bf num\-Initial\-Data\-Points}, time\-Between\-Data\-Points);\}\})
+\item 
+function {\bf Get\-Initial\-Data} ({\bf num\-Initial\-Data\-Points}, time\-Between\-Data\-Points)
+\item 
+function {\bf organize\-Data\-To\-Be\-Drawn} (initial\-Data)
+\item 
+function {\bf draw\-Chart} (channel\-Num, data, title, x\-Axis, y\-Axis, series\-Name)
+\item 
+function {\bf get\-New\-Data} (channel\-Number)
+\item 
+function {\bf set\-Chart\-Options} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+var {\bf chart\-Data} = [$\,$]
+\item 
+var {\bf new\-Data}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Deprecated\-Draw.\-js@{Deprecated\-Draw.\-js}!draw\-Chart@{draw\-Chart}}
+\index{draw\-Chart@{draw\-Chart}!DeprecatedDraw.js@{Deprecated\-Draw.\-js}}
+\subsubsection[{draw\-Chart}]{\setlength{\rightskip}{0pt plus 5cm}function draw\-Chart (
+\begin{DoxyParamCaption}
+\item[{}]{channel\-Num, }
+\item[{}]{data, }
+\item[{}]{title, }
+\item[{}]{x\-Axis, }
+\item[{}]{y\-Axis, }
+\item[{}]{series\-Name}
+\end{DoxyParamCaption}
+)}\label{_deprecated_draw_8js_ad18739f97a052bc5f2f97de51ef7df32}
+\index{Deprecated\-Draw.\-js@{Deprecated\-Draw.\-js}!Get\-Initial\-Data@{Get\-Initial\-Data}}
+\index{Get\-Initial\-Data@{Get\-Initial\-Data}!DeprecatedDraw.js@{Deprecated\-Draw.\-js}}
+\subsubsection[{Get\-Initial\-Data}]{\setlength{\rightskip}{0pt plus 5cm}function Get\-Initial\-Data (
+\begin{DoxyParamCaption}
+\item[{}]{num\-Initial\-Data\-Points, }
+\item[{}]{time\-Between\-Data\-Points}
+\end{DoxyParamCaption}
+)}\label{_deprecated_draw_8js_af3c4b879f39ae8e2914e7fc1cd89d64e}
+\index{Deprecated\-Draw.\-js@{Deprecated\-Draw.\-js}!get\-New\-Data@{get\-New\-Data}}
+\index{get\-New\-Data@{get\-New\-Data}!DeprecatedDraw.js@{Deprecated\-Draw.\-js}}
+\subsubsection[{get\-New\-Data}]{\setlength{\rightskip}{0pt plus 5cm}function get\-New\-Data (
+\begin{DoxyParamCaption}
+\item[{}]{channel\-Number}
+\end{DoxyParamCaption}
+)}\label{_deprecated_draw_8js_af560119474dc4441c258db36d40fdce7}
+\index{Deprecated\-Draw.\-js@{Deprecated\-Draw.\-js}!organize\-Data\-To\-Be\-Drawn@{organize\-Data\-To\-Be\-Drawn}}
+\index{organize\-Data\-To\-Be\-Drawn@{organize\-Data\-To\-Be\-Drawn}!DeprecatedDraw.js@{Deprecated\-Draw.\-js}}
+\subsubsection[{organize\-Data\-To\-Be\-Drawn}]{\setlength{\rightskip}{0pt plus 5cm}function organize\-Data\-To\-Be\-Drawn (
+\begin{DoxyParamCaption}
+\item[{}]{initial\-Data}
+\end{DoxyParamCaption}
+)}\label{_deprecated_draw_8js_a0f57919ef1359acb11cc39fa660ba67e}
+\index{Deprecated\-Draw.\-js@{Deprecated\-Draw.\-js}!ready@{ready}}
+\index{ready@{ready}!DeprecatedDraw.js@{Deprecated\-Draw.\-js}}
+\subsubsection[{ready}]{\setlength{\rightskip}{0pt plus 5cm}document ready (
+\begin{DoxyParamCaption}
+\item[{function()\{var initial\-Time\-In\-Minutes=parse\-Int(prompt(\char`\"{}Select the initial duration of time (in minutes) you \char`\"{}+\char`\"{}would like to view (must be whole number)\-: \char`\"{}));var {\bf num\-Initial\-Data\-Points};var time\-Between\-Data\-Points=6000;var {\bf ms\-Per\-Minute}=60000;{\bf num\-Initial\-Data\-Points}=parse\-Int((initial\-Time\-In\-Minutes $\ast${\bf ms\-Per\-Minute})/time\-Between\-Data\-Points);if(num\-Initial\-Data\-Points!=null)\{{\bf Get\-Initial\-Data}({\bf num\-Initial\-Data\-Points}, time\-Between\-Data\-Points);\}\}}]{}
+\end{DoxyParamCaption}
+)}\label{_deprecated_draw_8js_a9c99b82d9aafe9444aee2d86026ed1c8}
+\index{Deprecated\-Draw.\-js@{Deprecated\-Draw.\-js}!set\-Chart\-Options@{set\-Chart\-Options}}
+\index{set\-Chart\-Options@{set\-Chart\-Options}!DeprecatedDraw.js@{Deprecated\-Draw.\-js}}
+\subsubsection[{set\-Chart\-Options}]{\setlength{\rightskip}{0pt plus 5cm}function set\-Chart\-Options (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{_deprecated_draw_8js_ad18eea9ec9e3af76aa77016382ad817e}
+
+
+\subsection{Variable Documentation}
+\index{Deprecated\-Draw.\-js@{Deprecated\-Draw.\-js}!chart\-Data@{chart\-Data}}
+\index{chart\-Data@{chart\-Data}!DeprecatedDraw.js@{Deprecated\-Draw.\-js}}
+\subsubsection[{chart\-Data}]{\setlength{\rightskip}{0pt plus 5cm}var chart\-Data = [$\,$]}\label{_deprecated_draw_8js_ad94cc9e4dcea1e508ecd9b3fcce87df9}
+\index{Deprecated\-Draw.\-js@{Deprecated\-Draw.\-js}!new\-Data@{new\-Data}}
+\index{new\-Data@{new\-Data}!DeprecatedDraw.js@{Deprecated\-Draw.\-js}}
+\subsubsection[{new\-Data}]{\setlength{\rightskip}{0pt plus 5cm}var new\-Data}\label{_deprecated_draw_8js_a0c3daa5de0abb506a13f5a19d2408430}

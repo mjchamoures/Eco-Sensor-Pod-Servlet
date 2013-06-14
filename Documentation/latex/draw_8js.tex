@@ -1,0 +1,233 @@
+\section{Web\-Content/draw.js File Reference}
+\label{draw_8js}\index{Web\-Content/draw.\-js@{Web\-Content/draw.\-js}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+document {\bf ready} (function()\{\$(\char`\"{}\#channel\-List $>$ li $>$ a[data-\/target]\char`\"{}).parent('li').click(function()\{target=\$(this).children('a[data-\/target]').data('target');\$(target).collapse('toggle');\});\$(\char`\"{}\#channel\-List li\char`\"{}).click(function()\{var attribute\-Title=\$(this).attr(\char`\"{}title\char`\"{});var attribute\-Id=\$(this).attr(\char`\"{}id\char`\"{});var channel\-Name;if(attribute\-Title==\char`\"{}channel\char`\"{})\{channel\-Name=attribute\-Id;var V\-A\-L\-I\-D\-\_\-\-P\-R\-E\-S\-E\-T\-\_\-\-I\-N\-P\-U\-T=1;if({\bf save\-Chart\-Presets}()==V\-A\-L\-I\-D\-\_\-\-P\-R\-E\-S\-E\-T\-\_\-\-I\-N\-P\-U\-T)\{if({\bf load\-Interval})\{clear\-Interval({\bf load\-Interval});\}{\bf chart\-Setup}(channel\-Name);\}\}\});{\bf get\-Input\-Date}();{\bf bad\-Data\-Alert}();\})
+\item 
+function {\bf chart\-Setup} (channel\-Name)
+\item 
+function {\bf organize\-Data\-To\-Be\-Drawn} (channel\-Name, data)
+\item 
+function {\bf draw\-Chart} (channel\-Name, data, x\-Axis, y\-Axis)
+\item 
+function {\bf get\-New\-Data} (channel\-Name)
+\item 
+function {\bf save\-Chart\-Presets} ()
+\item 
+function {\bf convert\-Duration\-To\-Seconds} (duration)
+\item 
+function {\bf convert\-Date\-Time\-To\-Seconds} (date, time)
+\item 
+function {\bf get\-Input\-Date} ()
+\item 
+function {\bf set\-Chart\-Options} ()
+\item 
+function {\bf bad\-Data\-Alert} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+var {\bf new\-Point} = [$\,$]
+\item 
+var {\bf num\-Initial\-Data\-Points}
+\item 
+var {\bf time\-Between\-Updates} = 5000
+\item 
+var {\bf ms\-Per\-Minute} = 60000
+\item 
+var {\bf start\-Seconds}
+\item 
+var {\bf duration\-Seconds} = 10
+\item 
+var {\bf host\-Address}
+\item 
+var {\bf port\-Number}
+\item 
+var {\bf real\-Time\-Flag} = 0
+\item 
+var {\bf last\-Added\-Timestamp} = 0
+\item 
+var {\bf B\-A\-D\-\_\-\-D\-A\-T\-A\-\_\-\-R\-E\-Q\-U\-E\-S\-T} = -\/404
+\item 
+var {\bf T\-I\-M\-E\-\_\-\-S\-T\-A\-M\-P} = 0
+\item 
+var {\bf N\-E\-W\-\_\-\-D\-A\-T\-A} = 1
+\item 
+var {\bf load\-Interval}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{draw.\-js@{draw.\-js}!bad\-Data\-Alert@{bad\-Data\-Alert}}
+\index{bad\-Data\-Alert@{bad\-Data\-Alert}!draw.js@{draw.\-js}}
+\subsubsection[{bad\-Data\-Alert}]{\setlength{\rightskip}{0pt plus 5cm}function bad\-Data\-Alert (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{draw_8js_afc13773d49ea1a4a615ff41c48f01d83}
+Called if someone tries to click a channel\-Name without the necessaty settings filled in \index{draw.\-js@{draw.\-js}!chart\-Setup@{chart\-Setup}}
+\index{chart\-Setup@{chart\-Setup}!draw.js@{draw.\-js}}
+\subsubsection[{chart\-Setup}]{\setlength{\rightskip}{0pt plus 5cm}function chart\-Setup (
+\begin{DoxyParamCaption}
+\item[{}]{channel\-Name}
+\end{DoxyParamCaption}
+)}\label{draw_8js_a12f017c136933fe7ad738d64efff73c8}
+The first time a J\-Query request is made to the middle-\/end (Data\-Facilitator). If data is available for the request channel\-Name, then the initial series data is filled and sent off to be organized and charted
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel\-Name} & Name of channel link that was clicked on to be charted \\
+\hline
+\end{DoxyParams}
+\index{draw.\-js@{draw.\-js}!convert\-Date\-Time\-To\-Seconds@{convert\-Date\-Time\-To\-Seconds}}
+\index{convert\-Date\-Time\-To\-Seconds@{convert\-Date\-Time\-To\-Seconds}!draw.js@{draw.\-js}}
+\subsubsection[{convert\-Date\-Time\-To\-Seconds}]{\setlength{\rightskip}{0pt plus 5cm}function convert\-Date\-Time\-To\-Seconds (
+\begin{DoxyParamCaption}
+\item[{}]{date, }
+\item[{}]{time}
+\end{DoxyParamCaption}
+)}\label{draw_8js_a0d530b615fa2b2cc2cea584b2add7ee9}
+\index{draw.\-js@{draw.\-js}!convert\-Duration\-To\-Seconds@{convert\-Duration\-To\-Seconds}}
+\index{convert\-Duration\-To\-Seconds@{convert\-Duration\-To\-Seconds}!draw.js@{draw.\-js}}
+\subsubsection[{convert\-Duration\-To\-Seconds}]{\setlength{\rightskip}{0pt plus 5cm}function convert\-Duration\-To\-Seconds (
+\begin{DoxyParamCaption}
+\item[{}]{duration}
+\end{DoxyParamCaption}
+)}\label{draw_8js_a824dfb95c17487cde2a139d9b6b6f2d0}
+\index{draw.\-js@{draw.\-js}!draw\-Chart@{draw\-Chart}}
+\index{draw\-Chart@{draw\-Chart}!draw.js@{draw.\-js}}
+\subsubsection[{draw\-Chart}]{\setlength{\rightskip}{0pt plus 5cm}function draw\-Chart (
+\begin{DoxyParamCaption}
+\item[{}]{channel\-Name, }
+\item[{}]{data, }
+\item[{}]{x\-Axis, }
+\item[{}]{y\-Axis}
+\end{DoxyParamCaption}
+)}\label{draw_8js_a6a31d9e1e8a5b03ad5502e068450eaee}
+Generic chart drawing function. Draws the initial Series chart. If real-\/time updates are on, the \char`\"{}events\char`\"{} option of the chart is set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel\-Name} & A sensor's channel name. String \\
+\hline
+{\em data} & The initial set of data for a particular sensor. double[] \\
+\hline
+{\em x\-Axis} & X-\/axis title name \\
+\hline
+{\em y\-Axis} & Y-\/axis title name \\
+\hline
+\end{DoxyParams}
+\index{draw.\-js@{draw.\-js}!get\-Input\-Date@{get\-Input\-Date}}
+\index{get\-Input\-Date@{get\-Input\-Date}!draw.js@{draw.\-js}}
+\subsubsection[{get\-Input\-Date}]{\setlength{\rightskip}{0pt plus 5cm}function get\-Input\-Date (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{draw_8js_a12aef80838177a60ba7fad1ceb10dfdd}
+Gets the input data from the calendar datepicker \index{draw.\-js@{draw.\-js}!get\-New\-Data@{get\-New\-Data}}
+\index{get\-New\-Data@{get\-New\-Data}!draw.js@{draw.\-js}}
+\subsubsection[{get\-New\-Data}]{\setlength{\rightskip}{0pt plus 5cm}function get\-New\-Data (
+\begin{DoxyParamCaption}
+\item[{}]{channel\-Name}
+\end{DoxyParamCaption}
+)}\label{draw_8js_a21d1003be9dd0bf4aa4ddb2a7b201775}
+Event called by each draw\-Chart function to query the server for new data and update the chart.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel\-Name} & A sensor's channel name. String \\
+\hline
+\end{DoxyParams}
+\index{draw.\-js@{draw.\-js}!organize\-Data\-To\-Be\-Drawn@{organize\-Data\-To\-Be\-Drawn}}
+\index{organize\-Data\-To\-Be\-Drawn@{organize\-Data\-To\-Be\-Drawn}!draw.js@{draw.\-js}}
+\subsubsection[{organize\-Data\-To\-Be\-Drawn}]{\setlength{\rightskip}{0pt plus 5cm}function organize\-Data\-To\-Be\-Drawn (
+\begin{DoxyParamCaption}
+\item[{}]{channel\-Name, }
+\item[{}]{data}
+\end{DoxyParamCaption}
+)}\label{draw_8js_ad43578bdc4ec3e8daf827ab91d210b7a}
+Organize and setup each channels data to be passed off to be drawn on its corresponding chart. Any additional charts that are desired will be given a case in the switch statement.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel\-Name} & Name of channel link that was clicked on to be charted \\
+\hline
+{\em data} & The initial series data \\
+\hline
+\end{DoxyParams}
+\index{draw.\-js@{draw.\-js}!ready@{ready}}
+\index{ready@{ready}!draw.js@{draw.\-js}}
+\subsubsection[{ready}]{\setlength{\rightskip}{0pt plus 5cm}document ready (
+\begin{DoxyParamCaption}
+\item[{function()\{\$(\char`\"{}\#channel\-List $>$ li $>$ a[data-\/target]\char`\"{}).parent('li').click(function()\{target=\$(this).children('a[data-\/target]').data('target');\$(target).collapse('toggle');\});\$(\char`\"{}\#channel\-List li\char`\"{}).click(function()\{var attribute\-Title=\$(this).attr(\char`\"{}title\char`\"{});var attribute\-Id=\$(this).attr(\char`\"{}id\char`\"{});var channel\-Name;if(attribute\-Title==\char`\"{}channel\char`\"{})\{channel\-Name=attribute\-Id;var V\-A\-L\-I\-D\-\_\-\-P\-R\-E\-S\-E\-T\-\_\-\-I\-N\-P\-U\-T=1;if({\bf save\-Chart\-Presets}()==V\-A\-L\-I\-D\-\_\-\-P\-R\-E\-S\-E\-T\-\_\-\-I\-N\-P\-U\-T)\{if({\bf load\-Interval})\{clear\-Interval({\bf load\-Interval});\}{\bf chart\-Setup}(channel\-Name);\}\}\});{\bf get\-Input\-Date}();{\bf bad\-Data\-Alert}();\}}]{}
+\end{DoxyParamCaption}
+)}\label{draw_8js_aa2bfde0e209df476c3b0c68dd367bdb9}
+F\-R\-O\-N\-T-\/\-E\-N\-D \doxyref{Draw.\-js}{p.}{draw_8js}
+
+Purpose\-: Performs the charting and data requesting to the middle-\/end Data\-Facilitator Servlet.
+
+Main function that gets triggered upon access to the home page. Sits waiting for information to be entered into the Settings forms or until someone clicks a channel\-Name link
+
+Author\-: Michael Chamoures
+
+Modified\-: 6/11/2013 \index{draw.\-js@{draw.\-js}!save\-Chart\-Presets@{save\-Chart\-Presets}}
+\index{save\-Chart\-Presets@{save\-Chart\-Presets}!draw.js@{draw.\-js}}
+\subsubsection[{save\-Chart\-Presets}]{\setlength{\rightskip}{0pt plus 5cm}function save\-Chart\-Presets (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{draw_8js_a7b1c2ae6504840b89c2b3ed9e5ab231c}
+Capture input from user regarding start date/time, duration and real-\/time \index{draw.\-js@{draw.\-js}!set\-Chart\-Options@{set\-Chart\-Options}}
+\index{set\-Chart\-Options@{set\-Chart\-Options}!draw.js@{draw.\-js}}
+\subsubsection[{set\-Chart\-Options}]{\setlength{\rightskip}{0pt plus 5cm}function set\-Chart\-Options (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{draw_8js_ad18eea9ec9e3af76aa77016382ad817e}
+Sets the default chart options and themes that all charts share 
+
+\subsection{Variable Documentation}
+\index{draw.\-js@{draw.\-js}!B\-A\-D\-\_\-\-D\-A\-T\-A\-\_\-\-R\-E\-Q\-U\-E\-S\-T@{B\-A\-D\-\_\-\-D\-A\-T\-A\-\_\-\-R\-E\-Q\-U\-E\-S\-T}}
+\index{B\-A\-D\-\_\-\-D\-A\-T\-A\-\_\-\-R\-E\-Q\-U\-E\-S\-T@{B\-A\-D\-\_\-\-D\-A\-T\-A\-\_\-\-R\-E\-Q\-U\-E\-S\-T}!draw.js@{draw.\-js}}
+\subsubsection[{B\-A\-D\-\_\-\-D\-A\-T\-A\-\_\-\-R\-E\-Q\-U\-E\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}var B\-A\-D\-\_\-\-D\-A\-T\-A\-\_\-\-R\-E\-Q\-U\-E\-S\-T = -\/404}\label{draw_8js_a7f595d2e65ef1ce3b8b441c786b220c4}
+\index{draw.\-js@{draw.\-js}!duration\-Seconds@{duration\-Seconds}}
+\index{duration\-Seconds@{duration\-Seconds}!draw.js@{draw.\-js}}
+\subsubsection[{duration\-Seconds}]{\setlength{\rightskip}{0pt plus 5cm}var duration\-Seconds = 10}\label{draw_8js_a6c61848a7e81d88e72420ec1bedaa457}
+Default option in drop-\/down \index{draw.\-js@{draw.\-js}!host\-Address@{host\-Address}}
+\index{host\-Address@{host\-Address}!draw.js@{draw.\-js}}
+\subsubsection[{host\-Address}]{\setlength{\rightskip}{0pt plus 5cm}var host\-Address}\label{draw_8js_ac91e0e8fc64abbd0033a3c059eca68e2}
+Host address of a deployed sensor pod \index{draw.\-js@{draw.\-js}!last\-Added\-Timestamp@{last\-Added\-Timestamp}}
+\index{last\-Added\-Timestamp@{last\-Added\-Timestamp}!draw.js@{draw.\-js}}
+\subsubsection[{last\-Added\-Timestamp}]{\setlength{\rightskip}{0pt plus 5cm}var last\-Added\-Timestamp = 0}\label{draw_8js_a6421a742660a8a359a04593a4feb7a27}
+\index{draw.\-js@{draw.\-js}!load\-Interval@{load\-Interval}}
+\index{load\-Interval@{load\-Interval}!draw.js@{draw.\-js}}
+\subsubsection[{load\-Interval}]{\setlength{\rightskip}{0pt plus 5cm}var load\-Interval}\label{draw_8js_aaf9c4ee3f41fbfa232e275ee96828456}
+Keeps track of real-\/time update intervals \index{draw.\-js@{draw.\-js}!ms\-Per\-Minute@{ms\-Per\-Minute}}
+\index{ms\-Per\-Minute@{ms\-Per\-Minute}!draw.js@{draw.\-js}}
+\subsubsection[{ms\-Per\-Minute}]{\setlength{\rightskip}{0pt plus 5cm}var ms\-Per\-Minute = 60000}\label{draw_8js_aa1d50f246543db981d66fd029ef6828b}
+Milliseconds per minute \index{draw.\-js@{draw.\-js}!N\-E\-W\-\_\-\-D\-A\-T\-A@{N\-E\-W\-\_\-\-D\-A\-T\-A}}
+\index{N\-E\-W\-\_\-\-D\-A\-T\-A@{N\-E\-W\-\_\-\-D\-A\-T\-A}!draw.js@{draw.\-js}}
+\subsubsection[{N\-E\-W\-\_\-\-D\-A\-T\-A}]{\setlength{\rightskip}{0pt plus 5cm}var N\-E\-W\-\_\-\-D\-A\-T\-A = 1}\label{draw_8js_a1e30cc16117823a96b7965b0e86d43c5}
+\index{draw.\-js@{draw.\-js}!new\-Point@{new\-Point}}
+\index{new\-Point@{new\-Point}!draw.js@{draw.\-js}}
+\subsubsection[{new\-Point}]{\setlength{\rightskip}{0pt plus 5cm}var new\-Point = [$\,$]}\label{draw_8js_aed4ec9ad093c5147edd1127a3392c763}
+A new point of data during real-\/time updates \index{draw.\-js@{draw.\-js}!num\-Initial\-Data\-Points@{num\-Initial\-Data\-Points}}
+\index{num\-Initial\-Data\-Points@{num\-Initial\-Data\-Points}!draw.js@{draw.\-js}}
+\subsubsection[{num\-Initial\-Data\-Points}]{\setlength{\rightskip}{0pt plus 5cm}var num\-Initial\-Data\-Points}\label{draw_8js_ab1071cf842d220a66187e76f122b6c82}
+3000 with the below numbers (6000/60000) \index{draw.\-js@{draw.\-js}!port\-Number@{port\-Number}}
+\index{port\-Number@{port\-Number}!draw.js@{draw.\-js}}
+\subsubsection[{port\-Number}]{\setlength{\rightskip}{0pt plus 5cm}var port\-Number}\label{draw_8js_aea211f39cba93ca19d4ebf05282fba1f}
+Port num of a deployed sensor pod \index{draw.\-js@{draw.\-js}!real\-Time\-Flag@{real\-Time\-Flag}}
+\index{real\-Time\-Flag@{real\-Time\-Flag}!draw.js@{draw.\-js}}
+\subsubsection[{real\-Time\-Flag}]{\setlength{\rightskip}{0pt plus 5cm}var real\-Time\-Flag = 0}\label{draw_8js_ab8358dbff71474c707066659db16cf13}
+Keeps track of if real-\/time updates are on \index{draw.\-js@{draw.\-js}!start\-Seconds@{start\-Seconds}}
+\index{start\-Seconds@{start\-Seconds}!draw.js@{draw.\-js}}
+\subsubsection[{start\-Seconds}]{\setlength{\rightskip}{0pt plus 5cm}var start\-Seconds}\label{draw_8js_a1f96dd7b9048c991962522ca46741058}
+Calculated from start date and time \index{draw.\-js@{draw.\-js}!T\-I\-M\-E\-\_\-\-S\-T\-A\-M\-P@{T\-I\-M\-E\-\_\-\-S\-T\-A\-M\-P}}
+\index{T\-I\-M\-E\-\_\-\-S\-T\-A\-M\-P@{T\-I\-M\-E\-\_\-\-S\-T\-A\-M\-P}!draw.js@{draw.\-js}}
+\subsubsection[{T\-I\-M\-E\-\_\-\-S\-T\-A\-M\-P}]{\setlength{\rightskip}{0pt plus 5cm}var T\-I\-M\-E\-\_\-\-S\-T\-A\-M\-P = 0}\label{draw_8js_a8792334dd77cdf1d7fc53bad178e6153}
+\index{draw.\-js@{draw.\-js}!time\-Between\-Updates@{time\-Between\-Updates}}
+\index{time\-Between\-Updates@{time\-Between\-Updates}!draw.js@{draw.\-js}}
+\subsubsection[{time\-Between\-Updates}]{\setlength{\rightskip}{0pt plus 5cm}var time\-Between\-Updates = 5000}\label{draw_8js_a1a344bfcbd5f2bf6daee7c6c4d8a531f}
+In milliseconds 
